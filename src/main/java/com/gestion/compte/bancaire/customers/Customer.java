@@ -4,12 +4,10 @@ import com.gestion.compte.bancaire.User;
 
 public class Customer extends User {
     private String type;
-    private String phone;
 
-    public Customer(int id, String name, String firstname, String address, String type, String phone) {
-        super(id, name, firstname, address);
+    public Customer(int id, String name, String firstname, String gender, String address, String phone, String type) {
+        super(id, name, firstname, gender, address, phone);
         this.type = type;
-        this.phone = phone;
     }
 
     public String getType() {
@@ -20,12 +18,9 @@ public class Customer extends User {
         this.type = type;
     }
 
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    @Override
+    public String toString() {
+        return this.getGender() + " " + this.getName() + " " + this.getFirstname();
     }
 
 }

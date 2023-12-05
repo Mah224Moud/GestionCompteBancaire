@@ -7,16 +7,16 @@ public class Account implements Action {
     private int accountId;
     private int balance;
     private int accountNumber;
-    private String accountStatus = "active";
+    private String accountStatus;
     private Customer customer;
     private Banker banker;
 
-    public Account(int accountId, int balance, int accountNumber, String accountStatus, Customer customer,
+    public Account(int accountId, int balance, int accountNumber, Customer customer,
             Banker banker) {
         this.accountId = accountId;
         this.balance = balance;
         this.accountNumber = accountNumber;
-        this.accountStatus = accountStatus;
+        this.accountStatus = "actif";
         this.customer = customer;
         this.banker = banker;
     }
@@ -69,15 +69,16 @@ public class Account implements Action {
         this.banker = banker;
     }
 
-    @Override
-    public String toString() {
-        return "Bonjour, " + this.customer.getFirstname() + " " + this.customer.getFirstname() + ". Votre compte "
-                + this.getAccountNumber()
-                + " est "
-                + this.getAccountStatus()
-                + ". Votre solde est de "
-                + this.getBalance()
-                + "€";
+    public void info() {
+        System.out.println(
+                "***************************************************\n" +
+                        "****************** INFORMATION ********************\n" +
+                        "***************************************************\n" +
+                        "Bonjour " + this.getCustomer().toString() +
+                        "\nVotre compte numéro " + this.getAccountNumber() + " est " + this.getAccountStatus() + "." +
+                        "\nVotre solde est de " + this.getBalance() + "€" + "\n\n" +
+                        "Votre conseiller.ère est: " + this.getBanker().toString() + "\n\n");
+
     }
 
     @Override
@@ -92,6 +93,7 @@ public class Account implements Action {
 
     @Override
     public void seeBalance() {
-        System.out.println(this.toString());
+        System.out.println("Bonjour, " + this.getCustomer().toString() + " votre solde est de " + this.getBalance()
+                + "€");
     }
 }
