@@ -4,53 +4,54 @@ import com.gestion.compte.bancaire.banker.Banker;
 import com.gestion.compte.bancaire.customers.Customer;
 
 public class Account implements Action {
-    private int accountId;
-    private int balance;
-    private int accountNumber;
-    private String accountStatus;
+    private int id;
+    private double balance;
+    private int number;
+    private String status;
+    private int customerId;
+    private int bankerId;
     private Customer customer;
     private Banker banker;
 
-    public Account(int accountId, int balance, int accountNumber, Customer customer,
-            Banker banker) {
-        this.accountId = accountId;
+    public Account(int id, double balance, int number, int customerId, int bankerId) {
+        this.id = id;
         this.balance = balance;
-        this.accountNumber = accountNumber;
-        this.accountStatus = "actif";
-        this.customer = customer;
-        this.banker = banker;
+        this.number = number;
+        this.status = "actif";
+        this.customerId = customerId;
+        this.bankerId = bankerId;
     }
 
-    public int getAccountId() {
-        return this.accountId;
+    public int getId() {
+        return this.id;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return this.balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public int getAccountNumber() {
-        return this.accountNumber;
+    public int getNumber() {
+        return this.number;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public String getAccountStatus() {
-        return this.accountStatus;
+    public String getStatus() {
+        return this.status;
     }
 
-    public void setAccountStatus(String accountStatus) {
-        this.accountStatus = accountStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Customer getCustomer() {
@@ -69,30 +70,46 @@ public class Account implements Action {
         this.banker = banker;
     }
 
+    public int getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getBankerId() {
+        return this.bankerId;
+    }
+
+    public void setBankerId(int bankerId) {
+        this.bankerId = bankerId;
+    }
+
     public void info() {
         System.out.println(
                 "***************************************************\n" +
                         "****************** INFORMATION ********************\n" +
                         "***************************************************\n" +
                         "Bonjour " + this.getCustomer().toString() +
-                        "\nVotre compte numéro " + this.getAccountNumber() + " est " + this.getAccountStatus() + "." +
+                        "\nVotre compte numéro " + this.getNumber() + " est " + this.getStatus() + "." +
                         "\nVotre solde est de " + this.getBalance() + "€" + "\n\n" +
                         "Votre conseiller.ère est: " + this.getBanker().toString() + "\n\n");
 
     }
 
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(int accountNumber, double amount) {
         this.balance -= amount;
     }
 
     @Override
-    public void deposit(double amount) {
+    public void deposit(int accountNumber, double amount) {
         this.balance += amount;
     }
 
     @Override
-    public void seeBalance() {
+    public void seeBalance(int accountNumber) {
         System.out.println("Bonjour, " + this.getCustomer().toString() + " votre solde est de " + this.getBalance()
                 + "€");
     }

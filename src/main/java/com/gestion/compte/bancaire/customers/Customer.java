@@ -1,13 +1,19 @@
 package com.gestion.compte.bancaire.customers;
 
 import com.gestion.compte.bancaire.User;
+import com.gestion.compte.bancaire.accounts.Account;
 
 public class Customer extends User {
     private String type;
+    private int accountNumber;
+    private int bankerId;
 
-    public Customer(int id, String name, String firstname, String gender, String address, String phone, String type) {
+    public Customer(int id, String name, String firstname, String gender, String address, String phone, String type,
+            int accountNumber, int bankerId) {
         super(id, name, firstname, gender, address, phone);
         this.type = type;
+        this.accountNumber = accountNumber;
+        this.bankerId = bankerId;
     }
 
     public String getType() {
@@ -16,6 +22,22 @@ public class Customer extends User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public void setAccountNumber(int account_number) {
+        this.accountNumber = account_number;
+    }
+
+    public int getBankerId() {
+        return this.bankerId;
+    }
+
+    public void setBankerId(int bankerId) {
+        this.bankerId = bankerId;
     }
 
     @Override
