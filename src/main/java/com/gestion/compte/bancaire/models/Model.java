@@ -4,14 +4,12 @@ import com.gestion.compte.bancaire.banker.Banker;
 import com.gestion.compte.bancaire.customers.Customer;
 import com.gestion.compte.bancaire.database.DatabaseManager;
 import com.gestion.compte.bancaire.accounts.Account;
+import com.gestion.compte.bancaire.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 public class Model {
 
@@ -49,7 +47,46 @@ public class Model {
                             resultSet.getString("gender"),
                             resultSet.getString("address"),
                             resultSet.getString("phone"),
-                            resultSet.getString("position"));
+                            resultSet.getString("position"),
+                            resultSet.getString("email"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return banker;
+    }
+
+    /**
+     * Obtient un objet Banker à partir de son email et mot de passe.
+     *
+     * @param email    L'email du banquier.
+     * @param password Le mot de passe du banquier.
+     * @return Un objet Banker ou null si non trouvé.
+     */
+    public Banker getBanker(String email, String password) {
+        Banker banker = null;
+        String query = "SELECT * FROM banker WHERE email = ?";
+
+        try (Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String hashedPassword = resultSet.getString("password");
+                    if (Utils.isValidPassword(password, hashedPassword)) {
+                        banker = new Banker(
+                                resultSet.getInt("id"),
+                                resultSet.getString("name"),
+                                resultSet.getString("firstname"),
+                                resultSet.getString("gender"),
+                                resultSet.getString("address"),
+                                resultSet.getString("phone"),
+                                resultSet.getString("position"),
+                                email);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -133,10 +170,7 @@ public class Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        DecimalFormat df = new DecimalFormat("#,###.00", new DecimalFormatSymbols(Locale.US));
-        String balanceFormatted = df.format(balance);
-        return balanceFormatted;
+        return Utils.formatAmount(balance);
     }
 
     /**
@@ -149,10 +183,16 @@ public class Model {
 
     public boolean addCustomer(Customer customer) {
         boolean success = false;
-        String query = "INSERT INTO customer (id, name, firstname, gender, address, phone, type, account_number, banker_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO customer (id, name, firstname, gender, address, phone, type, account_number, banker_id, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = databaseManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            if (!Utils.isValidEmail(customer.getEmail())) {
+                throw new IllegalArgumentException("L'adresse email est invalide.");
+            }
+
+            String hashedPassword = Utils.hashPassword(customer.getPassword());
 
             preparedStatement.setInt(1, customer.getId());
             preparedStatement.setString(2, customer.getName());
@@ -163,6 +203,8 @@ public class Model {
             preparedStatement.setString(7, customer.getType());
             preparedStatement.setInt(8, customer.getAccountNumber());
             preparedStatement.setInt(9, customer.getBankerId());
+            preparedStatement.setString(10, customer.getEmail());
+            preparedStatement.setString(11, hashedPassword);
 
             int rowsAffected = preparedStatement.executeUpdate();
             success = rowsAffected > 0;

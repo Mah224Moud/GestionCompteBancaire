@@ -1,7 +1,6 @@
 package com.gestion.compte.bancaire.customers;
 
 import com.gestion.compte.bancaire.User;
-import com.gestion.compte.bancaire.accounts.Account;
 
 public class Customer extends User {
     private String type;
@@ -9,8 +8,8 @@ public class Customer extends User {
     private int bankerId;
 
     public Customer(int id, String name, String firstname, String gender, String address, String phone, String type,
-            int accountNumber, int bankerId) {
-        super(id, name, firstname, gender, address, phone);
+            int accountNumber, int bankerId, String email, String password) {
+        super(id, name, firstname, gender, address, phone, email, password);
         this.type = type;
         this.accountNumber = accountNumber;
         this.bankerId = bankerId;

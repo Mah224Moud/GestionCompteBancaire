@@ -1,22 +1,20 @@
 package com.gestion.compte.bancaire.banker;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-
 import com.gestion.compte.bancaire.User;
 import com.gestion.compte.bancaire.models.Model;
 import com.gestion.compte.bancaire.accounts.Account;
 import com.gestion.compte.bancaire.accounts.Action;
 import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.Utils;
 
 public class Banker extends User implements Action {
     private String position;
+
     Model bankerModel = new Model();
 
-    public Banker(int id) {
-        super(0, "", "", "", "", "");
-        Banker banker = bankerModel.getBankerById(id);
+    public Banker(String email, String password) {
+        super(0, "", "", "", "", "", "", "");
+        Banker banker = bankerModel.getBanker(email, password);
 
         this.setId(banker.getId());
         this.setName(banker.getName());
@@ -28,8 +26,15 @@ public class Banker extends User implements Action {
 
     }
 
-    public Banker(int id, String name, String firstname, String gender, String address, String phone, String position) {
-        super(id, name, firstname, gender, address, phone);
+    public Banker(int id, String name, String firstname, String gender, String address, String phone, String position,
+            String email, String password) {
+        super(id, name, firstname, gender, address, phone, email, password);
+        this.position = position;
+    }
+
+    public Banker(int id, String name, String firstname, String gender, String address, String phone, String position,
+            String email) {
+        super(id, name, firstname, gender, address, phone, email, "");
         this.position = position;
     }
 
@@ -41,15 +46,10 @@ public class Banker extends User implements Action {
         this.position = position;
     }
 
-    private String formatAmount(double amount) {
-        DecimalFormat df = new DecimalFormat("#,###.00", new DecimalFormatSymbols(Locale.US));
-        return df.format(amount) + "€";
-    }
-
     @Override
     public void withdraw(int accountNumber, double amount) {
         if (bankerModel.withdraw(accountNumber, amount)) {
-            System.out.println("Retrait de " + formatAmount(amount) + "€ effectué avec succès.\n");
+            System.out.println("Retrait de " + Utils.formatAmount(amount) + "€ effectué avec succès.\n");
         } else {
             System.out.println("Retrait Impossible.\n");
         }
@@ -58,7 +58,7 @@ public class Banker extends User implements Action {
     @Override
     public void deposit(int accountNumber, double amount) {
         if (bankerModel.deposit(accountNumber, amount)) {
-            System.out.println("Depot de " + formatAmount(amount) + "€ effectfué avec succès.\n");
+            System.out.println("Depot de " + Utils.formatAmount(amount) + "€ effectfué avec succès.\n");
         } else {
             System.out.println("Depot Impossible.\n");
         }

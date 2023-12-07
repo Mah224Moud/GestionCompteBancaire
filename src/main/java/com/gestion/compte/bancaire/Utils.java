@@ -1,5 +1,9 @@
 package com.gestion.compte.bancaire;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Utils {
@@ -8,11 +12,11 @@ public class Utils {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public static boolean checkPassword(String password, String hashedPassword) {
+    public static boolean isValidPassword(String password, String hashedPassword) {
         return BCrypt.checkpw(password, hashedPassword);
     }
 
-    public static boolean checkEmail(String email) {
+    public static boolean isValidEmail(String email) {
         return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 
@@ -24,5 +28,10 @@ public class Utils {
             sb.append(chars.charAt(index));
         }
         return sb.toString();
+    }
+
+    public static String formatAmount(double amount) {
+        DecimalFormat df = new DecimalFormat("#,###.00", new DecimalFormatSymbols(Locale.US));
+        return df.format(amount) + "€";
     }
 }
