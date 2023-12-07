@@ -11,20 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Model {
-
+public class BankerModel {
     private DatabaseManager databaseManager;
 
-    public Model() {
+    public BankerModel() {
         databaseManager = new DatabaseManager();
     }
 
-    /**
-     * Obtient un objet Banker à partir de son ID.
-     *
-     * @param bankerId L'ID du banquier.
-     * @return Un objet Banker ou null si non trouvé.
-     */
     /**
      * Obtient un objet Banker à partir de son ID.
      *
@@ -54,7 +47,6 @@ public class Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return banker;
     }
 
@@ -92,85 +84,11 @@ public class Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        CommonModel commonModel = new CommonModel();
+        if (banker == null || !commonModel.isLogged(email, password, "banker")) {
+            throw new IllegalArgumentException("Adresse email ou mot de passe invalide !!!");
+        }
         return banker;
-    }
-
-    /**
-     * Effectue un dépôt sur un compte spécifié.
-     *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le dépôt a réussi, false sinon.
-     */
-    public boolean deposit(int accountNumber, double amount) {
-        boolean success = false;
-        String query = "UPDATE account SET balance = balance + ? WHERE number = ?";
-
-        try (Connection connection = databaseManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setInt(2, accountNumber);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            success = rowsAffected > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return success;
-    }
-
-    /**
-     * Effectue un retrait sur un compte spécifié.
-     *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le retrait a réussi, false sinon.
-     */
-
-    public boolean withdraw(int accountNumber, double amount) {
-        boolean success = false;
-        String query = "UPDATE account SET balance = balance - ? WHERE number = ?";
-
-        try (Connection connection = databaseManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setInt(2, accountNumber);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            success = rowsAffected > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return success;
-    }
-
-    /**
-     * Obtient le solde d'un compte spécifié.
-     *
-     * @param accountNumber Le numéro du compte.
-     * @return Le solde du compte.
-     */
-    public String getBalance(int accountNumber) {
-        double balance = 0;
-        String query = "SELECT balance FROM account WHERE number = ?";
-        try (Connection connection = databaseManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setInt(1, accountNumber);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    balance = resultSet.getDouble("balance");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Utils.formatAmount(balance);
     }
 
     /**
@@ -293,5 +211,4 @@ public class Model {
 
         return lastAccountNumber;
     }
-
 }

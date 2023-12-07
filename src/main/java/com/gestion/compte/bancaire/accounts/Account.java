@@ -99,17 +99,17 @@ public class Account implements Action {
     }
 
     @Override
-    public void withdraw(int accountNumber, double amount) {
+    public void withdraw(double amount) {
         this.balance -= amount;
     }
 
     @Override
-    public void deposit(int accountNumber, double amount) {
+    public void deposit(double amount) {
         this.balance += amount;
     }
 
     @Override
-    public void seeBalance(int accountNumber) {
+    public void seeBalance() {
         System.out.println("Bonjour, " + this.getCustomer().toString() + " votre solde est de " + this.getBalance()
                 + "€");
     }
