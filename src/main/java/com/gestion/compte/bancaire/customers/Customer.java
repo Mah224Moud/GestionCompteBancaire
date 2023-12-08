@@ -11,10 +11,11 @@ public class Customer extends User implements Action {
     private int accountNumber;
     private int bankerId;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerModel customerModel;
 
     public Customer(String email, String password) {
         super(0, "", "", "", "", "", "", "");
+        this.customerModel = new CustomerModel();
         Customer customer = customerModel.getCustomer(email, password);
         this.setId(customer.getBankerId());
         this.setName(customer.getName());
@@ -83,21 +84,21 @@ public class Customer extends User implements Action {
     }
 
     @Override
-    public void withdraw(double amount) {
-        if (customerModel.withdraw(this.getAccountNumber(), amount)) {
-            System.out.println("\nRetrait de " + Utils.formatAmount(amount) + "€ effectué avec succès.\n");
-        } else {
-            System.out.println("Retrait Impossible.\n");
+    public void withdraw(double amount) throws Exception {
+        if (!customerModel.withdraw(this.getAccountNumber(), amount)) {
+            throw new Exception("Retrait Impossible.\n");
         }
+
+        System.out.println("\nRetrait de " + Utils.formatAmount(amount) + "€ effectué avec succès.\n");
     }
 
     @Override
-    public void deposit(double amount) {
-        if (customerModel.deposit(this.getAccountNumber(), amount)) {
-            System.out.println("\nDepot de " + Utils.formatAmount(amount) + "€ effectfué avec succès.\n");
-        } else {
-            System.out.println("Depot Impossible.\n");
+    public void deposit(double amount) throws Exception {
+        if (!customerModel.deposit(this.getAccountNumber(), amount)) {
+            throw new Exception("Depot Impossible.\n");
         }
+
+        System.out.println("\nDepot de " + Utils.formatAmount(amount) + "€ effectfué avec succès.\n");
     }
 
     @Override

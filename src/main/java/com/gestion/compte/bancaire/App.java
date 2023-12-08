@@ -9,7 +9,7 @@ import com.gestion.compte.bancaire.accounts.Account;
  *
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Banker banker = new Banker("banquier@test.com", "banquier");
         System.out.println(banker.toString());

@@ -9,10 +9,11 @@ import com.gestion.compte.bancaire.models.BankerModel;
 public class Banker extends User {
     private String position;
 
-    BankerModel bankerModel = new BankerModel();
+    BankerModel bankerModel;
 
     public Banker(String email, String password) {
         super(0, "", "", "", "", "", "", "");
+        this.bankerModel = new BankerModel();
         Banker banker = bankerModel.getBanker(email, password);
 
         this.setId(banker.getId());
@@ -53,29 +54,50 @@ public class Banker extends User {
                 + "€");
     }
 
-    public void addCustomer(Customer customer) {
-        int accountNumber = bankerModel.getLastAccountNumber() + 1;
-        int customerId = bankerModel.getLastCustomerId() + 1;
+    public void addCustomer(Customer customer) throws Exception {
+        int accountNumber = generateAccountNumber();
+        int customerId = generateCustomerId();
 
         customer.setAccountNumber(accountNumber);
         customer.setId(customerId);
 
         Account account = new Account(0, 0.0, accountNumber, customerId, this.getId());
 
-        boolean successCustomer = bankerModel.addCustomer(customer);
-        boolean successAccount = bankerModel.addAccount(account);
-        if (successAccount && successCustomer) {
-            System.out.println(
-                    "\n" +
-                            "***************************************************\n" +
-                            "********************* AJOUT ***********************\n" +
-                            "***************************************************\n");
+        boolean successCustomer = addCustomerToDatabase(customer);
+        boolean successAccount = addAccountToDatabase(account);
 
-            System.out.println(customer.toString() + " a été ajouté(e) avec succes.");
-            System.out.println("Le compte n° " + accountNumber + " a été ajouté avec succes.\n");
+        if (successAccount && successCustomer) {
+            displaySuccessMessage(customer, accountNumber);
         } else {
-            System.out.println("Problème survenue lors de l'ajout veuillez reessayer.\n");
+            throw new Exception("Problème survenue lors de l'ajout veuillez reessayer.\n");
         }
+    }
+
+    private int generateAccountNumber() {
+        return bankerModel.getLastAccountNumber() + 1;
+    }
+
+    private int generateCustomerId() {
+        return bankerModel.getLastCustomerId() + 1;
+    }
+
+    private boolean addCustomerToDatabase(Customer customer) {
+        return bankerModel.addCustomer(customer);
+    }
+
+    private boolean addAccountToDatabase(Account account) {
+        return bankerModel.addAccount(account);
+    }
+
+    private void displaySuccessMessage(Customer customer, int accountNumber) {
+        System.out.println(
+                "\n" +
+                        "***************************************************\n" +
+                        "********************* AJOUT ***********************\n" +
+                        "***************************************************\n");
+
+        System.out.println(customer.toString() + " a été ajouté(e) avec succes.");
+        System.out.println("Le compte n° " + accountNumber + " a été ajouté avec succes.\n");
     }
 
     @Override
