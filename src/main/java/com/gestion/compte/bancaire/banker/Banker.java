@@ -1,9 +1,9 @@
 package com.gestion.compte.bancaire.banker;
 
-import com.gestion.compte.bancaire.User;
 import com.gestion.compte.bancaire.models.CommonModel;
+import com.gestion.compte.bancaire.utils.User;
 import com.gestion.compte.bancaire.accounts.Account;
-import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.customer.Customer;
 import com.gestion.compte.bancaire.models.BankerModel;
 
 public class Banker extends User {

@@ -1,7 +1,8 @@
 package com.gestion.compte.bancaire.accounts;
 
 import com.gestion.compte.bancaire.banker.Banker;
-import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.customer.Customer;
+import com.gestion.compte.bancaire.utils.Action;
 
 public class Account implements Action {
     private int id;

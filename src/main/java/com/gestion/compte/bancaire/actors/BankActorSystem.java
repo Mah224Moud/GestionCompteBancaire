@@ -1,6 +1,6 @@
-package com.gestion.compte.bancaire.Actors;
+package com.gestion.compte.bancaire.actors;
 
-import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.customer.Customer;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -11,14 +11,12 @@ public class BankActorSystem {
     private ActorSystem actorSystem;
     private ActorRef customerActor;
     private ActorRef bankerActor;
-    // private ActorRef bankActor;
 
     public BankActorSystem() {
         actorSystem = ActorSystem.create("BankActorSystem");
 
         customerActor = actorSystem.actorOf(Props.create(CustomerActor.class), "clientActor");
         bankerActor = actorSystem.actorOf(Props.create(BankerActor.class), "bankerActor");
-        // bankActor = actorSystem.actorOf(Props.create(BankActor.class), "bankActor");
     }
 
     public ActorRef getCustomerActor() {
@@ -28,10 +26,6 @@ public class BankActorSystem {
     public ActorRef getBankerActor() {
         return bankerActor;
     }
-
-    // public ActorRef getBankActor() {
-    // return bankActor;
-    // }
 
     public void shutdown() {
         actorSystem.terminate();

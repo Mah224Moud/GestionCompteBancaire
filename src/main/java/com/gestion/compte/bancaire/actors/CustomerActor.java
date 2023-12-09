@@ -1,11 +1,11 @@
-package com.gestion.compte.bancaire.Actors;
+package com.gestion.compte.bancaire.actors;
 
 import akka.actor.AbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
-import com.gestion.compte.bancaire.Login;
-import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.customer.Customer;
+import com.gestion.compte.bancaire.utils.Login;
 
 public class CustomerActor extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);

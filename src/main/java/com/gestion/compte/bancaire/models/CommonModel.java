@@ -1,7 +1,7 @@
 package com.gestion.compte.bancaire.models;
 
 import com.gestion.compte.bancaire.database.DatabaseManager;
-import com.gestion.compte.bancaire.Utils;
+import com.gestion.compte.bancaire.utils.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

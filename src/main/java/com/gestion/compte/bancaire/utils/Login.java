@@ -1,4 +1,4 @@
-package com.gestion.compte.bancaire;
+package com.gestion.compte.bancaire.utils;
 
 public class Login {
     private String email;

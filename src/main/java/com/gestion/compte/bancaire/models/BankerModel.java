@@ -1,10 +1,10 @@
 package com.gestion.compte.bancaire.models;
 
 import com.gestion.compte.bancaire.banker.Banker;
-import com.gestion.compte.bancaire.customers.Customer;
+import com.gestion.compte.bancaire.customer.Customer;
 import com.gestion.compte.bancaire.database.DatabaseManager;
+import com.gestion.compte.bancaire.utils.Utils;
 import com.gestion.compte.bancaire.accounts.Account;
-import com.gestion.compte.bancaire.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

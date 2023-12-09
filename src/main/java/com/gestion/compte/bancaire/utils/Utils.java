@@ -1,4 +1,4 @@
-package com.gestion.compte.bancaire;
+package com.gestion.compte.bancaire.utils;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

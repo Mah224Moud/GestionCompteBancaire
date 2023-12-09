@@ -1,10 +1,10 @@
-package com.gestion.compte.bancaire.customers;
+package com.gestion.compte.bancaire.customer;
 
-import com.gestion.compte.bancaire.User;
-import com.gestion.compte.bancaire.Utils;
-import com.gestion.compte.bancaire.accounts.Action;
 import com.gestion.compte.bancaire.models.CommonModel;
 import com.gestion.compte.bancaire.models.CustomerModel;
+import com.gestion.compte.bancaire.utils.Action;
+import com.gestion.compte.bancaire.utils.User;
+import com.gestion.compte.bancaire.utils.Utils;
 
 public class Customer extends User implements Action {
     private String type;

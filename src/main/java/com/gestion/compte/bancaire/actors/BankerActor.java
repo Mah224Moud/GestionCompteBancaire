@@ -1,4 +1,4 @@
-package com.gestion.compte.bancaire.Actors;
+package com.gestion.compte.bancaire.actors;
 
 import akka.actor.AbstractActor;
 import akka.event.Logging;

@@ -1,4 +1,4 @@
-package com.gestion.compte.bancaire;
+package com.gestion.compte.bancaire.utils;
 
 public class User {
     private int id;
