@@ -104,9 +104,9 @@ public class Customer extends User implements Action {
     @Override
     public void seeBalance() {
         CommonModel commonModel = new CommonModel();
-        System.out.println("Le solde du compte n°" + this.getAccountNumber() + " est de: "
-                + commonModel.getBalance(this.getAccountNumber())
-                + "€");
+        System.out.println("\n" + this.getGender() + " " + this.getName() + ", le solde de votre compte n°"
+                + this.getAccountNumber() + " est de: "
+                + commonModel.getBalance(this.getAccountNumber()) + "\n");
     }
 
 }

@@ -1,0 +1,15 @@
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/banker/Banker.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/Actors/CustomerActor.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/Login.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/accounts/Action.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/Actors/BankActorSystem.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/models/CustomerModel.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/customers/Customer.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/App.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/Utils.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/models/BankerModel.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/database/DatabaseManager.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/accounts/Account.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/models/CommonModel.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/User.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire/src/main/java/com/gestion/compte/bancaire/Actors/BankerActor.java
