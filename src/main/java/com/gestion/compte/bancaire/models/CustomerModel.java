@@ -17,59 +17,6 @@ public class CustomerModel {
         databaseManager = new DatabaseManager();
     }
 
-    /**
-     * Effectue un dépôt sur un compte spécifié.
-     *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le dépôt a réussi, false sinon.
-     */
-    public boolean deposit(int accountNumber, double amount) {
-        boolean success = false;
-        String query = "UPDATE account SET balance = balance + ? WHERE number = ?";
-
-        try (Connection connection = databaseManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setInt(2, accountNumber);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            success = rowsAffected > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return success;
-    }
-
-    /**
-     * Effectue un retrait sur un compte spécifié.
-     *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le retrait a réussi, false sinon.
-     */
-
-    public boolean withdraw(int accountNumber, double amount) {
-        boolean success = false;
-        String query = "UPDATE account SET balance = balance - ? WHERE number = ?";
-
-        try (Connection connection = databaseManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setInt(2, accountNumber);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            success = rowsAffected > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return success;
-    }
-
     public Customer getCustomer(String email, String password) {
         Customer customer = null;
         String query = "SELECT * FROM customer WHERE email = ?";

@@ -34,4 +34,19 @@ public class Utils {
         DecimalFormat df = new DecimalFormat("#,###.00", new DecimalFormatSymbols(Locale.US));
         return df.format(amount) + "€";
     }
+
+    public static void menuCustomer() {
+        System.out.println(
+                "\n" +
+                        "*********************************************\n" +
+                        "******************** MENU *******************\n" +
+                        "*********************************************");
+        System.out.println("1. Voir le solde");
+        System.out.println("2. Faire un depot");
+        System.out.println("3. Faire un retrait");
+        System.out.println("4. Quitter");
+        System.out.println(
+                "*********************************************\n" +
+                        "*********************************************\n");
+    }
 }

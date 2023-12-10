@@ -11,3 +11,5 @@ mvn clean compile
 ```bash
 mvn exec:java
 ```
+
+mvn exec:java -Dexec.mainClass=com.gestion.compte.bancaire.CustomerApp

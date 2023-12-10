@@ -1,10 +1,9 @@
-package com.gestion.compte.bancaire.accounts;
+package com.gestion.compte.bancaire.account;
 
 import com.gestion.compte.bancaire.banker.Banker;
 import com.gestion.compte.bancaire.customer.Customer;
-import com.gestion.compte.bancaire.utils.Action;
 
-public class Account implements Action {
+public class Account {
     private int id;
     private double balance;
     private int number;
@@ -85,33 +84,5 @@ public class Account implements Action {
 
     public void setBankerId(int bankerId) {
         this.bankerId = bankerId;
-    }
-
-    public void info() {
-        System.out.println(
-                "***************************************************\n" +
-                        "****************** INFORMATION ********************\n" +
-                        "***************************************************\n" +
-                        "Bonjour " + this.getCustomer().toString() +
-                        "\nVotre compte numéro " + this.getNumber() + " est " + this.getStatus() + "." +
-                        "\nVotre solde est de " + this.getBalance() + "€" + "\n\n" +
-                        "Votre conseiller.ère est: " + this.getBanker().toString() + "\n\n");
-
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        this.balance -= amount;
-    }
-
-    @Override
-    public void deposit(double amount) {
-        this.balance += amount;
-    }
-
-    @Override
-    public void seeBalance() {
-        System.out.println("Bonjour, " + this.getCustomer().toString() + " votre solde est de " + this.getBalance()
-                + "€");
     }
 }

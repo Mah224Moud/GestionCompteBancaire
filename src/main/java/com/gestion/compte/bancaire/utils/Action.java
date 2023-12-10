@@ -1,9 +1,9 @@
 package com.gestion.compte.bancaire.utils;
 
 public interface Action {
-    public void withdraw(double amount) throws Exception;
+    public String withdraw(double amount, int accountNumber) throws Exception;
 
-    public void deposit(double amount) throws Exception;
+    public String deposit(double amount, int accountNumber) throws Exception;
 
-    public void seeBalance();
+    public void seeBalance(int accountNumber);
 }

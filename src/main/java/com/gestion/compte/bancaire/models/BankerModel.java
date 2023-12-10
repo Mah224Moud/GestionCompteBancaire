@@ -1,10 +1,10 @@
 package com.gestion.compte.bancaire.models;
 
+import com.gestion.compte.bancaire.account.Account;
 import com.gestion.compte.bancaire.banker.Banker;
 import com.gestion.compte.bancaire.customer.Customer;
 import com.gestion.compte.bancaire.database.DatabaseManager;
 import com.gestion.compte.bancaire.utils.Utils;
-import com.gestion.compte.bancaire.accounts.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -210,5 +210,58 @@ public class BankerModel {
         }
 
         return lastAccountNumber;
+    }
+
+    /**
+     * Effectue un dépôt sur un compte spécifié.
+     *
+     * @param accountNumber Le numéro du compte.
+     * @return true si le dépôt a réussi, false sinon.
+     */
+    public boolean deposit(int accountNumber, double amount) {
+        boolean success = false;
+        String query = "UPDATE account SET balance = balance + ? WHERE number = ?";
+
+        try (Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setInt(2, accountNumber);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            success = rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
+    /**
+     * Effectue un retrait sur un compte spécifié.
+     *
+     * @param accountNumber Le numéro du compte.
+     * @return true si le retrait a réussi, false sinon.
+     */
+
+    public boolean withdraw(int accountNumber, double amount) {
+        boolean success = false;
+        String query = "UPDATE account SET balance = balance - ? WHERE number = ?";
+
+        try (Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setInt(2, accountNumber);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            success = rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return success;
     }
 }

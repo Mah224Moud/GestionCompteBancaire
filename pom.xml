@@ -95,12 +95,38 @@
         </plugin>
 
         <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <configuration>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.6.0</version>
+          <executions>
+            <execution>
+              <id>app</id>
+              <goals>
+                <goal>java</goal>
+              </goals>
+              <configuration>
                 <mainClass>com.gestion.compte.bancaire.App</mainClass>
-            </configuration>
+              </configuration>
+            </execution>
+            <execution>
+              <id>customer-app</id>
+              <goals>
+                <goal>java</goal>
+              </goals>
+              <configuration>
+                <mainClass>com.gestion.compte.bancaire.CustomerApp</mainClass>
+              </configuration>
+            </execution>
+            <execution>
+              <id>banker-app</id>
+              <goals>
+                <goal>java</goal>
+              </goals>
+              <configuration>
+                <mainClass>com.gestion.compte.bancaire.BankerApp</mainClass>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

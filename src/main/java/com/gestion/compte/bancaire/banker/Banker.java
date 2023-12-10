@@ -1,12 +1,14 @@
 package com.gestion.compte.bancaire.banker;
 
 import com.gestion.compte.bancaire.models.CommonModel;
+import com.gestion.compte.bancaire.utils.Action;
 import com.gestion.compte.bancaire.utils.User;
-import com.gestion.compte.bancaire.accounts.Account;
+import com.gestion.compte.bancaire.utils.Utils;
+import com.gestion.compte.bancaire.account.Account;
 import com.gestion.compte.bancaire.customer.Customer;
 import com.gestion.compte.bancaire.models.BankerModel;
 
-public class Banker extends User {
+public class Banker extends User implements Action {
     private String position;
 
     BankerModel bankerModel;
@@ -47,11 +49,30 @@ public class Banker extends User {
         this.position = position;
     }
 
+    @Override
     public void seeBalance(int accountNumber) {
         CommonModel commonModel = new CommonModel();
         System.out.println("Le solde du compte n°" + accountNumber + " est de "
                 + commonModel.getBalance(accountNumber)
                 + "€");
+    }
+
+    @Override
+    public String withdraw(double amount, int accountNumber) throws Exception {
+        if (!bankerModel.withdraw(accountNumber, amount)) {
+            throw new Exception("Retrait Impossible.\n");
+        }
+
+        return "\nRetrait de " + Utils.formatAmount(amount) + "€ effectué avec succès.\n";
+    }
+
+    @Override
+    public String deposit(double amount, int accountNumber) throws Exception {
+        if (!bankerModel.deposit(accountNumber, amount)) {
+            throw new Exception("Depot Impossible.\n");
+        }
+
+        return "\nDepot de " + Utils.formatAmount(amount) + "€ effectfué avec succès.\n";
     }
 
     public void addCustomer(Customer customer) throws Exception {
