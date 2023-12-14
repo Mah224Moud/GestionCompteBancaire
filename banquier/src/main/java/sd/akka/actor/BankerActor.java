@@ -13,6 +13,9 @@ import sd.akka.banker.Banker;
 import sd.akka.utils.Login;
 import sd.akka.utils.Message;
 import sd.akka.utils.Logged;
+import sd.akka.utils.CreateCustomer;
+import sd.akka.customer.Customer;
+import sd.akka.utils.Balance;
 
 public class BankerActor extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
@@ -31,15 +34,16 @@ public class BankerActor extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(Transaction.class, transaction -> {
-                    log.info("Message recu par la banque: {}", transaction.getMessage());
                     String message = transaction.getMessage();
                     switch (message) {
                         case "Faire un depot":
+                            log.info("Message recu par la banque: {}\n", transaction.getMessage());
                             String depositMsg = banker.deposit(transaction.getAmount(), transaction.getAccountNumber());
                             log.info("\n" + depositMsg);
                             bank.tell(new Message(depositMsg, 0), ActorRef.noSender());
                             break;
                         case "Faire un retrait":
+                            log.info("Message recu par la banque: {}\n", transaction.getMessage());
                             String withdrawalMsg = banker.withdraw(transaction.getAmount(),
                                     transaction.getAccountNumber());
                             log.info("\n" + withdrawalMsg);
@@ -66,6 +70,15 @@ public class BankerActor extends AbstractActor {
                 })
                 .match(String.class, s -> {
                     log.info("Received String message: {}", s);
+                })
+                .match(CreateCustomer.class, createCustomer -> {
+                    Customer customer = createCustomer.getCustomer();
+                    customer.setBankerId(banker.getId());
+                    banker.addCustomer(customer);
+                })
+                .match(Balance.class, message -> {
+                    log.info("\nMessage recu: {}", message.getMessage());
+                    banker.seeBalance(message.getAccountNumber());
                 })
                 .matchAny(o -> log.info("received unknown message"))
                 .build();

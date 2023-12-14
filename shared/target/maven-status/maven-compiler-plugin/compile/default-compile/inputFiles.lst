@@ -5,11 +5,12 @@
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Action.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/banker/Banker.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/User.java
-/media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/Joueur.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/customer/Customer.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/models/BankerModel.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Login.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Message.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/CreateCustomer.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Transaction.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/account/Account.java
+/media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Balance.java
 /media/mamoudou/Hermano224/M1/gestion-compte-bancaire (copie)/shared/src/main/java/sd/akka/utils/Logged.java

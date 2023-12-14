@@ -55,9 +55,8 @@ public class Banker extends User implements Action {
     @Override
     public void seeBalance(int accountNumber) {
         CommonModel commonModel = new CommonModel(databaseManager);
-        System.out.println("Le solde du compte n°" + accountNumber + " est de "
-                + commonModel.getBalance(accountNumber)
-                + "€");
+        System.out.println("\nLe solde du compte n°" + accountNumber + " est de "
+                + commonModel.getBalance(accountNumber));
     }
 
     @Override
@@ -120,8 +119,12 @@ public class Banker extends User implements Action {
                         "********************* AJOUT ***********************\n" +
                         "***************************************************\n");
 
-        System.out.println(customer.toString() + " a été ajouté(e) avec succes.");
+        System.out.println(customer.getGender() + " " + customer.getName() + " " + customer.getFirstname()
+                + " a été ajouté(e) avec succes.");
         System.out.println("Le compte n° " + accountNumber + " a été ajouté avec succes.\n");
+        System.out.println(
+                "***************************************************\n" +
+                        "***************************************************\n");
     }
 
     @Override

@@ -5,8 +5,10 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import org.mindrot.jbcrypt.BCrypt;
+import java.util.Scanner;
 
 public class Utils {
+    private static Scanner scanner = new Scanner(System.in);
 
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
@@ -48,5 +50,74 @@ public class Utils {
         System.out.println(
                 "*********************************************\n" +
                         "*********************************************\n");
+    }
+
+    public static void menuBanker() {
+        System.out.println(
+                "\n" +
+                        "*********************************************\n" +
+                        "******************** MENU *******************\n" +
+                        "*********************************************");
+        System.out.println("1. Voir le solde d'un client");
+        System.out.println("2. Consutler la liste des clients connecté");
+        System.out.println("3. Ajouter un client");
+        System.out.println("4. Quitter");
+        System.out.println(
+                "*********************************************\n" +
+                        "*********************************************\n");
+    }
+
+    public static String getCustomerName() {
+        System.out.print("Entrez le nom du client: ");
+        String name = scanner.nextLine();
+        return name.trim();
+    }
+
+    public static String getCustomerFirstname() {
+        System.out.print("Entrez le prenom du client: ");
+        String firstname = scanner.nextLine();
+        return firstname.trim();
+    }
+
+    public static String getCustomerGender() {
+        System.out.print("Entrez le genre du client (Mr ou Mme): ");
+        String gender = scanner.nextLine();
+        if (!gender.equals("Mr") && !gender.equals("Mme")) {
+            gender = "Mr";
+        }
+        return gender.trim();
+    }
+
+    public static String getCustomerAddress() {
+        System.out.print("Entrez l'adresse du client: ");
+        String address = scanner.nextLine();
+        return address.trim();
+    }
+
+    public static String getCustomerPhone() {
+        System.out.print("Entrez le numero de telephone du client: ");
+        String phone = scanner.nextLine();
+        return phone.trim();
+    }
+
+    public static String getCustomerEmail() {
+        System.out.print("Entrez l'email du client: ");
+        String email = scanner.nextLine();
+        return email.trim();
+    }
+
+    public static String getCustomerPassword() {
+        System.out.print("Entrez le mot de passe du client: ");
+        String password = scanner.nextLine();
+        return password.trim();
+    }
+
+    public static String getCustomerType() {
+        System.out.print("Entrez le type du client (Particulier ou Entreprise): ");
+        String type = scanner.nextLine();
+        if (!type.equals("Particulier") && !type.equals("Entreprise")) {
+            type = "Particulier";
+        }
+        return type.trim();
     }
 }

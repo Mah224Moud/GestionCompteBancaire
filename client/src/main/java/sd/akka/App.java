@@ -19,7 +19,7 @@ public class App {
         commonModel = new CommonModel(databaseManager);
     }
 
-    public void start(ActorRef customerActor) {
+    public void start(ActorRef customerActor, ActorSystem actorSystem) {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("\n\nEntrez votre email : ");
             String email = scanner.nextLine();
@@ -55,6 +55,7 @@ public class App {
                             break;
                         case "4":
                             System.out.println("Au revoir !");
+                            endSystem(actorSystem);
                             return;
                         default:
                             System.out.println("Choix invalide");
@@ -65,15 +66,19 @@ public class App {
         }
     }
 
-    public static void main(String[] args) {
-        ActorSystem actorSystem = ActorSystem.create("Customer");
-        ActorRef customer = actorSystem.actorOf(CustomerActor.props(actorSystem), "customer");
-
-        new App().start(customer);
-
+    public void endSystem(ActorSystem actorSystem) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             actorSystem.terminate();
             System.out.println("System terminated.");
         }));
+    }
+    public static void main(String[] args) {
+        ActorSystem actorSystem = ActorSystem.create("Customer");
+        ActorRef customer = actorSystem.actorOf(CustomerActor.props(actorSystem), "customer");
+
+        App app = new App();
+        app.start(customer, actorSystem);
+
+        app.endSystem(actorSystem);
     }
 }

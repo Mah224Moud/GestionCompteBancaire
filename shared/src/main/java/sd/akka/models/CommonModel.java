@@ -80,4 +80,29 @@ public class CommonModel {
         return isLoggedIn;
     }
 
+    /**
+     * Vérifie si un compte existe.
+     *
+     * @param accountNumber Le numéro du compte.
+     * @return true si le compte existe, false sinon.
+     */
+    public boolean accountExists(int accountNumber) {
+        boolean exists = false;
+        String query = "SELECT 1 FROM account WHERE number = ?";
+        try (
+                Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, accountNumber);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    exists = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
 }

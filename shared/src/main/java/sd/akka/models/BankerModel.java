@@ -191,7 +191,7 @@ public class BankerModel {
             e.printStackTrace();
         }
 
-        return lastCustomerId;
+        return lastCustomerId >= 0 ? lastCustomerId : 1;
     }
 
     /**
@@ -215,7 +215,7 @@ public class BankerModel {
             e.printStackTrace();
         }
 
-        return lastAccountNumber;
+        return lastAccountNumber >= 0 ? lastAccountNumber : 1;
     }
 
     /**
