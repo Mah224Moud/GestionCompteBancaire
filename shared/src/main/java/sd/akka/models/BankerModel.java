@@ -4,6 +4,7 @@ import sd.akka.banker.Banker;
 import sd.akka.customer.Customer;
 import sd.akka.database.DatabaseManager;
 import sd.akka.account.Account;
+import sd.akka.utils.History;
 import sd.akka.utils.Utils;
 
 import java.sql.Connection;
@@ -191,7 +192,7 @@ public class BankerModel {
             e.printStackTrace();
         }
 
-        return lastCustomerId >= 0 ? lastCustomerId : 1;
+        return lastCustomerId > 0 ? lastCustomerId : 1;
     }
 
     /**
@@ -215,7 +216,7 @@ public class BankerModel {
             e.printStackTrace();
         }
 
-        return lastAccountNumber >= 0 ? lastAccountNumber : 1;
+        return lastAccountNumber > 0 ? lastAccountNumber : 1;
     }
 
     /**
@@ -264,6 +265,28 @@ public class BankerModel {
             int rowsAffected = preparedStatement.executeUpdate();
             success = rowsAffected > 0;
             databaseManager.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
+    public boolean addHistory(History history) {
+        boolean success = false;
+        String query = "INSERT INTO history (amount, type, account_number) VALUES (?, ?, ?)";
+
+        try (Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setDouble(1, history.getAmount());
+            preparedStatement.setString(2, history.getType());
+            preparedStatement.setInt(3, history.getAccoutNumber());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            success = rowsAffected > 0;
+            databaseManager.closeConnection();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
