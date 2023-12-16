@@ -2,7 +2,6 @@ package sd.akka.utils;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Histories implements Serializable {
     private List<History> histories;

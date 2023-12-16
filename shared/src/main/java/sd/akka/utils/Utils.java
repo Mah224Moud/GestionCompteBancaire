@@ -2,6 +2,9 @@ package sd.akka.utils;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -119,5 +122,18 @@ public class Utils {
             type = "Particulier";
         }
         return type.trim();
+    }
+
+    public static String convertDate(String date) {
+        SimpleDateFormat dbDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date dateFromBD = dbDateFormat.parse(date);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy 'à' HH:mm");
+            return dateFormat.format(dateFromBD);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+
     }
 }

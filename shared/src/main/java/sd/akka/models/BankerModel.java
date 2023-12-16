@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankerModel {
     private DatabaseManager databaseManager;
@@ -292,5 +294,29 @@ public class BankerModel {
         }
 
         return success;
+    }
+
+    public List<History> getHistories(int accountNumber) {
+        List<History> histories = new ArrayList<>();
+        String query = "SELECT * FROM history WHERE account_number = ?";
+        try (Connection connection = databaseManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, accountNumber);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    histories.add(new History(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("account_number"),
+                            resultSet.getDouble("amount"),
+                            resultSet.getString("type"),
+                            Utils.convertDate(resultSet.getString("date"))));
+                }
+                databaseManager.closeConnection();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return histories;
     }
 }
