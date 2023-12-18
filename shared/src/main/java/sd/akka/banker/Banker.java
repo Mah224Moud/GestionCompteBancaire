@@ -6,8 +6,12 @@ import sd.akka.utils.Utils;
 import sd.akka.customer.Customer;
 import sd.akka.database.DatabaseManager;
 import sd.akka.models.BankerModel;
+
+import java.util.List;
+
 import sd.akka.account.Account;
 import sd.akka.utils.Action;
+import sd.akka.utils.History;
 
 public class Banker extends User implements Action {
     private String position;
@@ -75,6 +79,16 @@ public class Banker extends User implements Action {
         }
 
         return "\nDepot de " + Utils.formatAmount(amount) + " effectué avec succès.\n";
+    }
+
+    @Override
+    public List<History> getHistories(int accountNumber) {
+        return bankerModel.getHistories(accountNumber);
+    }
+
+    @Override
+    public boolean addHistory(History history) {
+        return bankerModel.addHistory(history);
     }
 
     public void addCustomer(Customer customer) throws Exception {

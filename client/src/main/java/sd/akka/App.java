@@ -54,6 +54,10 @@ public class App {
                             customerActor.tell(new Message("Faire un retrait", withdraw), ActorRef.noSender());
                             break;
                         case "4":
+                            System.out.println("Option choisie: Consutler l'historique des transactions");
+                            customerActor.tell(new Message("Consutler l'historique des transactions", 0.0), ActorRef.noSender());
+                            break;
+                        case "5":
                             System.out.println("Au revoir !");
                             endSystem(actorSystem);
                             return;

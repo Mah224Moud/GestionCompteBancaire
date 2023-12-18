@@ -49,7 +49,8 @@ public class Utils {
         System.out.println("1. Voir le solde");
         System.out.println("2. Faire un depot");
         System.out.println("3. Faire un retrait");
-        System.out.println("4. Quitter");
+        System.out.println("4. Consutler l'historique des transactions");
+        System.out.println("5. Quitter");
         System.out.println(
                 "*********************************************\n" +
                         "*********************************************\n");

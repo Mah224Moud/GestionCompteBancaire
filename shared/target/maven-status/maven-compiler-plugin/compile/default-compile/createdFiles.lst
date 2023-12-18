@@ -1,6 +1,7 @@
 sd/akka/models/BankerModel.class
 sd/akka/utils/Message.class
 sd/akka/models/CustomerModel.class
+sd/akka/utils/History.class
 sd/akka/utils/CreateCustomer.class
 sd/akka/models/CommonModel.class
 sd/akka/database/DatabaseManager.class
@@ -8,9 +9,11 @@ sd/akka/customer/Customer.class
 sd/akka/utils/User.class
 sd/akka/banker/Banker.class
 sd/akka/utils/Transaction.class
+sd/akka/utils/HistMessage.class
 sd/akka/utils/Utils.class
 sd/akka/utils/Login.class
 sd/akka/utils/Balance.class
+sd/akka/utils/Histories.class
 sd/akka/utils/Logged.class
 sd/akka/account/Account.class
 sd/akka/utils/Action.class

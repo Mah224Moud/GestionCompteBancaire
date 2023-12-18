@@ -13,7 +13,8 @@ import sd.akka.customer.Customer;
 import sd.akka.utils.Login;
 import sd.akka.utils.Message;
 import sd.akka.utils.Logged;
-
+import sd.akka.utils.HistMessage;
+import sd.akka.utils.Histories;
 public class CustomerActor extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
@@ -52,6 +53,9 @@ public class CustomerActor extends AbstractActor {
                                             customer.getAccountNumber()),
                                     ActorRef.noSender());
                             break;
+                        case "Consutler l'historique des transactions":
+                            log.info("\nMessage recu par le client: {}", message.getMessage());
+                            bank.tell(new HistMessage(message.getMessage(), customer.getAccountNumber()), ActorRef.noSender());
                         default:
                             log.info("\nMessage recu par le client: {}", message.getMessage());
                             return;
@@ -69,6 +73,10 @@ public class CustomerActor extends AbstractActor {
                             customer.getPhone(),
                             "CLIENT");
                     bank.tell(logged, ActorRef.noSender());
+                })
+                .match(Histories.class, histories -> {
+                    log.info("\nMessage recu par le client: L'historique des transactions...\n");
+                    histories.seeHistories();
                 })
                 .match(String.class, s -> {
                     log.info("\n{}", s);

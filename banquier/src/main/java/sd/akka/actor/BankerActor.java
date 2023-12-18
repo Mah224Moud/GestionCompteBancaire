@@ -16,6 +16,9 @@ import sd.akka.utils.Logged;
 import sd.akka.utils.CreateCustomer;
 import sd.akka.customer.Customer;
 import sd.akka.utils.Balance;
+import sd.akka.utils.HistMessage;
+import sd.akka.utils.History;
+import sd.akka.utils.Histories;
 
 public class BankerActor extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
@@ -41,6 +44,12 @@ public class BankerActor extends AbstractActor {
                             String depositMsg = banker.deposit(transaction.getAmount(), transaction.getAccountNumber());
                             log.info("\n" + depositMsg);
                             bank.tell(new Message(depositMsg, 0), ActorRef.noSender());
+                            banker.addHistory(new History(
+                                0, 
+                                transaction.getAccountNumber(), 
+                                transaction.getAmount(), 
+                                "Depot", 
+                                ""));
                             break;
                         case "Faire un retrait":
                             log.info("Message recu par la banque: {}\n", transaction.getMessage());
@@ -48,11 +57,23 @@ public class BankerActor extends AbstractActor {
                                     transaction.getAccountNumber());
                             log.info("\n" + withdrawalMsg);
                             bank.tell(new Message(withdrawalMsg, 0), ActorRef.noSender());
-                            break;
+                            banker.addHistory(new History(
+                                0, 
+                                transaction.getAccountNumber(), 
+                                transaction.getAmount(), 
+                                "Retrait", 
+                                ""));
+                            break;                        
                         default:
                             log.info("Message non traité par le client");
                             return;
                     }
+                })
+                .match(HistMessage.class, histMessage -> {
+                    log.info("Message recu par la banque: {}\n", histMessage.getMessage());
+                    Histories histories = new Histories(banker.getHistories(histMessage.getAccountNumber()));
+                    bank.tell(histories, ActorRef.noSender());
+                    log.info("\nHistoriques des transactions envoyées...\n");
                 })
                 .match(Login.class, login -> {
                     banker = new Banker(login.getEmail(), login.getPassword());

@@ -1,6 +1,8 @@
 package sd.akka.utils;
 
-public class History {
+import java.io.Serializable;
+
+public class History implements Serializable {
     private int id;
     private int accountNumber;
     private double amount;

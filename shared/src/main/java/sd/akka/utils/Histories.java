@@ -15,6 +15,10 @@ public class Histories implements Serializable {
     }
 
     public void seeHistories() {
+        System.out.println("\n***********************************************");
+        System.out.println("******** HISTORIQUE DES TRANSACTIONS ****1*****");
+        System.out.println("***********************************************\n");
+
         if (this.getHistories().isEmpty()) {
             System.out.println("\nVous n'avez effectuer aucune transaction !!!");
         } else {
