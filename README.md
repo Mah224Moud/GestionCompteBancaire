@@ -71,19 +71,22 @@ Mot de passe : client3
 
 ### Banque:
 
-- Transmettre les demandes du client au banquier
-- Renvoyer les messages de confirmation du banquier au client
+- Transmettre les demandes de depot ou de retrait d'argent du client au banquier.
+- Renvoyer les messages de confirmation des depots et des retraits du banquier au client.
+- Transmettre les demandes d'historique de transactions au banquier et renvoyées la réponse au client.
 
 ### Banquier:
 
-- Consulter le solde d'un client à l'aide de son numéro de compte
-- Traiter les demandes du client venant de la banque et renvoyer les messages de confirmation
-- Créer un nouveau compte pour un client(compte client et compte bancaire)
+- Consulter le solde d'un client à l'aide de son numéro de compte.
+- Traiter les demandes du client venant de la banque à propos des depots ou des retraits d'argent et renvoyer les messages de confirmation à la banque.
+- Créer un nouveau compte pour un client(compte client et compte bancaire).
+- Traiter les deamandes d'historique de transaction recues de la banque et renvoyer l'historique.
 
 ### Client:
 
-- Consulter son solde
-- Faire une demande de depot ou de retrait d'argent
+- Consulter son solde.
+- Faire une demande de depot ou de retrait d'argent à la banque.
+- Consulter son historique de transactions en faisant une demande à la banque.
 
 ## Author
 
