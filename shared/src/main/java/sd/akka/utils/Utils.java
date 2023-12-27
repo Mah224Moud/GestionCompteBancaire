@@ -63,9 +63,8 @@ public class Utils {
                         "******************** MENU *******************\n" +
                         "*********************************************");
         System.out.println("1. Voir le solde d'un client");
-        System.out.println("2. Consutler la liste des clients connecté");
-        System.out.println("3. Ajouter un client");
-        System.out.println("4. Quitter");
+        System.out.println("2. Ajouter un client");
+        System.out.println("3. Quitter");
         System.out.println(
                 "*********************************************\n" +
                         "*********************************************\n");

@@ -2,11 +2,9 @@ package sd.akka.actor;
 
 import akka.actor.AbstractActor;
 import akka.actor.Props;
-import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
 import akka.actor.ActorSystem;
-import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
