@@ -10,10 +10,20 @@ public class Histories implements Serializable {
         this.histories = histories;
     }
 
+    /**
+     * Retrieves the list of histories.
+     *
+     * @return the list of histories
+     */
     public List<History> getHistories() {
         return this.histories;
     }
 
+    /**
+     * Prints the transaction history of the current object.
+     *
+     * @return description of return value
+     */
     public void seeHistories() {
         System.out.println("\n***********************************************");
         System.out.println("******** HISTORIQUE DES TRANSACTIONS ****1*****");

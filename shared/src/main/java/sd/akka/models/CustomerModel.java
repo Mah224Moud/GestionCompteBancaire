@@ -17,6 +17,13 @@ public class CustomerModel {
         this.databaseManager = databaseManager;
     }
 
+    /**
+     * Retrieves a customer from the database using the provided email and password.
+     *
+     * @param email    the email of the customer
+     * @param password the password of the customer
+     * @return the Customer object if the email and password match, null otherwise
+     */
     public Customer getCustomer(String email, String password) {
         Customer customer = null;
         String query = "SELECT * FROM customer WHERE email = ?";
@@ -54,6 +61,13 @@ public class CustomerModel {
         return customer;
     }
 
+    /**
+     * Retrieves a customer from the database by their ID.
+     *
+     * @param customerId the ID of the customer to retrieve
+     * @return the Customer object representing the customer with the given ID,
+     *         or null if no customer with the given ID exists
+     */
     public Customer getCustomerById(int customerId) {
         Customer customer = null;
         String query = "SELECT * FROM customer WHERE id = ?";

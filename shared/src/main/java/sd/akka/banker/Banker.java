@@ -48,14 +48,29 @@ public class Banker extends User implements Action {
         this.position = position;
     }
 
+    /**
+     * Returns the position of the object.
+     *
+     * @return the position of the object
+     */
     public String getPosition() {
         return this.position;
     }
 
+    /**
+     * Sets the position of the object.
+     *
+     * @param position the new position to set
+     */
     public void setPosition(String position) {
         this.position = position;
     }
 
+    /**
+     * See the balance of a specific account.
+     *
+     * @param accountNumber the account number of the account
+     */
     @Override
     public void seeBalance(int accountNumber) {
         CommonModel commonModel = new CommonModel(databaseManager);
@@ -63,6 +78,14 @@ public class Banker extends User implements Action {
                 + commonModel.getBalance(accountNumber));
     }
 
+    /**
+     * Withdraws the specified amount from the given account number.
+     *
+     * @param amount        the amount to withdraw
+     * @param accountNumber the account number to withdraw from
+     * @return the success message if the withdrawal is successful
+     * @throws Exception if the withdrawal is not possible
+     */
     @Override
     public String withdraw(double amount, int accountNumber) throws Exception {
         if (!bankerModel.withdraw(accountNumber, amount)) {
@@ -72,6 +95,14 @@ public class Banker extends User implements Action {
         return "\nRetrait de " + Utils.formatAmount(amount) + " effectué avec succès.\n";
     }
 
+    /**
+     * Deposits the specified amount into the account with the given account number.
+     *
+     * @param amount        the amount to be deposited
+     * @param accountNumber the account number of the account
+     * @return a message indicating the success of the deposit
+     * @throws Exception if the deposit is not possible
+     */
     @Override
     public String deposit(double amount, int accountNumber) throws Exception {
         if (!bankerModel.deposit(accountNumber, amount)) {
@@ -81,16 +112,34 @@ public class Banker extends User implements Action {
         return "\nDepot de " + Utils.formatAmount(amount) + " effectué avec succès.\n";
     }
 
+    /**
+     * Retrieves the histories associated with the given account number.
+     *
+     * @param accountNumber the account number for which to retrieve histories
+     * @return a list of History objects representing the account's histories
+     */
     @Override
     public List<History> getHistories(int accountNumber) {
         return bankerModel.getHistories(accountNumber);
     }
 
+    /**
+     * Adds a history to the system.
+     *
+     * @param history the history object to be added
+     * @return true if the history was added successfully, false otherwise
+     */
     @Override
     public boolean addHistory(History history) {
         return bankerModel.addHistory(history);
     }
 
+    /**
+     * Adds a customer to the system.
+     *
+     * @param customer the customer object to be added
+     * @throws Exception if there is a problem adding the customer to the database
+     */
     public void addCustomer(Customer customer) throws Exception {
         int accountNumber = generateAccountNumber();
         int customerId = generateCustomerId();
@@ -110,22 +159,52 @@ public class Banker extends User implements Action {
         }
     }
 
+    /**
+     * Generates a new account number for a customer.
+     *
+     * @return the newly generated account number
+     */
     private int generateAccountNumber() {
         return bankerModel.getLastAccountNumber() + 1;
     }
 
+    /**
+     * Generates a new customer ID by retrieving the last customer ID from the
+     * banker model
+     * and incrementing it by one.
+     *
+     * @return the new customer ID
+     */
     private int generateCustomerId() {
         return bankerModel.getLastCustomerId() + 1;
     }
 
+    /**
+     * Adds a customer to the database.
+     *
+     * @param customer the customer to be added
+     * @return true if the customer is successfully added, false otherwise
+     */
     private boolean addCustomerToDatabase(Customer customer) {
         return bankerModel.addCustomer(customer);
     }
 
+    /**
+     * Adds an account to the database.
+     *
+     * @param account the account to be added
+     * @return true if the account was successfully added, false otherwise
+     */
     private boolean addAccountToDatabase(Account account) {
         return bankerModel.addAccount(account);
     }
 
+    /**
+     * Displays a success message after adding a customer and an account.
+     *
+     * @param customer      the customer object containing the customer details
+     * @param accountNumber the account number of the added account
+     */
     private void displaySuccessMessage(Customer customer, int accountNumber) {
         System.out.println(
                 "\n" +
@@ -141,6 +220,11 @@ public class Banker extends User implements Action {
                         "***************************************************\n");
     }
 
+    /**
+     * Returns a formatted string representation of the object.
+     *
+     * @return a string representation of the object
+     */
     @Override
     public String toString() {
         return "\n" +

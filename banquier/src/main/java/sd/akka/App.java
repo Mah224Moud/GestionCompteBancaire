@@ -20,6 +20,16 @@ public class App {
         commonModel = new CommonModel(databaseManager);
     }
 
+    /**
+     * Starts the banker system by prompting the user to enter their email and
+     * password,
+     * and then logging them in. Once logged in, the user is presented with a menu
+     * of options
+     * to perform various banking operations.
+     *
+     * @param bankerActor the reference to the banker actor
+     * @param actorSystem the actor system
+     */
     public void start(ActorRef bankerActor, ActorSystem actorSystem) {
         try (Scanner scanner = new Scanner(System.in)) {
             String email = "";

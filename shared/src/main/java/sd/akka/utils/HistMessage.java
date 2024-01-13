@@ -12,10 +12,20 @@ public class HistMessage implements Serializable {
         this.accountNumber = accountNumber;
     }
 
+    /**
+     * Retrieves the message stored in the 'message' field.
+     *
+     * @return the message string.
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Returns the account number.
+     *
+     * @return the account number
+     */
     public int getAccountNumber() {
         return accountNumber;
     }

@@ -15,6 +15,7 @@ import sd.akka.utils.Message;
 import sd.akka.utils.Logged;
 import sd.akka.utils.HistMessage;
 import sd.akka.utils.Histories;
+
 public class CustomerActor extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
@@ -28,6 +29,11 @@ public class CustomerActor extends AbstractActor {
         this.bank = actorSystem.actorSelection("akka://myActorSystem@127.0.0.1:8810/user/bankActor");
     }
 
+    /**
+     * Creates the receive behavior for this actor.
+     *
+     * @return the receive behavior
+     */
     @Override
     public Receive createReceive() {
         return receiveBuilder()
@@ -55,7 +61,8 @@ public class CustomerActor extends AbstractActor {
                             break;
                         case "Consutler l'historique des transactions":
                             log.info("\nMessage recu par le client: {}", message.getMessage());
-                            bank.tell(new HistMessage(message.getMessage(), customer.getAccountNumber()), ActorRef.noSender());
+                            bank.tell(new HistMessage(message.getMessage(), customer.getAccountNumber()),
+                                    ActorRef.noSender());
                         default:
                             log.info("\nMessage recu par le client: {}", message.getMessage());
                             return;
@@ -85,6 +92,12 @@ public class CustomerActor extends AbstractActor {
                 .build();
     }
 
+    /**
+     * Creates and returns a Props object for the CustomerActor class.
+     *
+     * @param actorSystem the ActorSystem to be used by the CustomerActor
+     * @return the Props object for the CustomerActor class
+     */
     public static Props props(ActorSystem actorSystem) {
         return Props.create(CustomerActor.class, () -> new CustomerActor(actorSystem));
     }

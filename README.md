@@ -1,6 +1,6 @@
 # Gestion de compte bancaire avec Akka remote
 
-Cette projet consite au développement d'un système de gestion de comptes bancaires à l’aide d’Akka. Un banquier
+Ce projet consite au développement d'un système de gestion de comptes bancaires à l’aide d’Akka. Un banquier
 est en charge de plusieurs comptes, et travaille dans une banque. Lorsqu’un client se présente à la banque pour déposer ou retirer de l’argent, la banque doit transmettre la demande du client au banquier responsable de son compte.  
 Un mécanisme de persistance à été implémenté en liaison avec un SGBD, afin de pouvoir retrouver l’état des comptes des clients même en cas d’arrêt du système.
 
@@ -87,6 +87,10 @@ Mot de passe : client3
 - Consulter son solde.
 - Faire une demande de depot ou de retrait d'argent à la banque.
 - Consulter son historique de transactions en faisant une demande à la banque.
+
+### Demo:
+
+[Regarder cette vidéo](https://youtu.be/4Bjiu-Fbw8o)
 
 ## Author
 

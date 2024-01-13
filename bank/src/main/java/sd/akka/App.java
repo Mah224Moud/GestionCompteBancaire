@@ -6,6 +6,12 @@ import akka.actor.ActorSystem;
 import sd.akka.actor.*;
 
 public class App {
+    /**
+     * Initializes the main Java function.
+     *
+     * @param args the command line arguments
+     * @return none
+     */
     public static void main(String[] args) {
         ActorSystem actorSystem = ActorSystem.create("myActorSystem");
         ActorRef bankActor = actorSystem.actorOf(BankActor.props(actorSystem), "bankActor");

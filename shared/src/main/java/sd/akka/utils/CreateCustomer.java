@@ -12,6 +12,11 @@ public class CreateCustomer extends Customer implements Serializable {
         super(id, name, firstname, gender, address, phone, type, accountNumber, bankerId, email, password);
     }
 
+    /**
+     * Retrieves the customer information.
+     *
+     * @return the customer object with all the information
+     */
     public Customer getCustomer() {
         return new Customer(this.getId(), this.getName(), this.getFirstname(), this.getGender(), this.getAddress(),
                 this.getPhone(), this.getType(), this.getAccountNumber(), this.getBankerId(), this.getEmail(),

@@ -11,10 +11,20 @@ public class Login implements Serializable {
         this.password = password;
     }
 
+    /**
+     * Retrieves the email associated with this object.
+     *
+     * @return the email associated with this object
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Gets the password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }

@@ -11,10 +11,20 @@ public class Message implements Serializable {
         this.amount = amount;
     }
 
+    /**
+     * Retrieves the message stored in the object.
+     *
+     * @return The message stored in the object as a string.
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Retrieves the amount.
+     *
+     * @return the amount
+     */
     public double getAmount() {
         return amount;
     }

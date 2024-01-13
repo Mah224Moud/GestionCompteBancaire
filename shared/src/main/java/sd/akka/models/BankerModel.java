@@ -22,10 +22,10 @@ public class BankerModel {
     }
 
     /**
-     * Obtient un objet Banker à partir de son ID.
+     * Retrieves a banker from the database based on the provided banker ID.
      *
-     * @param bankerId L'ID du banquier.
-     * @return Un objet Banker ou null si non trouvé.
+     * @param bankerId The ID of the banker to retrieve.
+     * @return The banker object if found, null otherwise.
      */
     public Banker getBankerById(int bankerId) {
         Banker banker = null;
@@ -55,11 +55,12 @@ public class BankerModel {
     }
 
     /**
-     * Obtient un objet Banker à partir de son email et mot de passe.
+     * Retrieves a Banker object based on the given email and password.
      *
-     * @param email    L'email du banquier.
-     * @param password Le mot de passe du banquier.
-     * @return Un objet Banker ou null si non trouvé.
+     * @param email    the email of the banker
+     * @param password the password of the banker
+     * @return the Banker object corresponding to the email and password,
+     *         or null if no matching banker is found
      */
     public Banker getBanker(String email, String password) {
         Banker banker = null;
@@ -97,13 +98,11 @@ public class BankerModel {
     }
 
     /**
-     * Ajoute un client à la base de données.
+     * Adds a customer to the database.
      *
-     * @param bankerId L'ID du banquier.
-     * @param customer L'objet Customer à ajouter.
-     * @return true si l'ajout a réussi, false sinon.
+     * @param customer the customer object to be added
+     * @return true if the customer was successfully added, false otherwise
      */
-
     public boolean addCustomer(Customer customer) {
         boolean success = false;
         String query = "INSERT INTO customer (id, name, firstname, gender, address, phone, type, account_number, banker_id, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -141,13 +140,10 @@ public class BankerModel {
     }
 
     /**
-     * Obtient l'ID du dernier client dans la base de données.
+     * Adds an account to the database.
      *
-     * @param bankerId   L'ID du banquier.
-     * @param customerId L'ID du client.
-     * @param Account    L'objet Account à ajouter.
-     * 
-     * @return L'ID du dernier client.
+     * @param account the Account object to be added
+     * @return true if the account was successfully added, false otherwise
      */
     public boolean addAccount(Account account) {
         boolean success = false;
@@ -174,9 +170,9 @@ public class BankerModel {
     }
 
     /**
-     * Obtient l'ID du dernier client dans la base de données.
-     * 
-     * @return L'ID du dernier client.
+     * Retrieves the ID of the last customer in the database.
+     *
+     * @return the ID of the last customer, or 1 if no customers exist
      */
     public int getLastCustomerId() {
         int lastCustomerId = 0;
@@ -198,9 +194,9 @@ public class BankerModel {
     }
 
     /**
-     * Obtient le numero de compte du dernier compte dans la base de données.
-     * 
-     * @return Le numero de compte du dernier compte.
+     * Retrieves the last account number from the database.
+     *
+     * @return the last account number, or 1 if no account number is found
      */
     public int getLastAccountNumber() {
         int lastAccountNumber = 0;
@@ -222,10 +218,11 @@ public class BankerModel {
     }
 
     /**
-     * Effectue un dépôt sur un compte spécifié.
+     * Deposits a specified amount into a specified account.
      *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le dépôt a réussi, false sinon.
+     * @param accountNumber the number of the account to deposit into
+     * @param amount        the amount to deposit
+     * @return true if the deposit was successful, false otherwise
      */
     public boolean deposit(int accountNumber, double amount) {
         boolean success = false;
@@ -248,12 +245,12 @@ public class BankerModel {
     }
 
     /**
-     * Effectue un retrait sur un compte spécifié.
+     * Withdraws a specified amount from a bank account.
      *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le retrait a réussi, false sinon.
+     * @param accountNumber the account number of the bank account
+     * @param amount        the amount to be withdrawn
+     * @return true if the withdrawal was successful, false otherwise
      */
-
     public boolean withdraw(int accountNumber, double amount) {
         boolean success = false;
         String query = "UPDATE account SET balance = balance - ? WHERE number = ?";
@@ -274,6 +271,12 @@ public class BankerModel {
         return success;
     }
 
+    /**
+     * Adds a history record to the database.
+     *
+     * @param history the history object to be added
+     * @return true if the history record was successfully added, false otherwise
+     */
     public boolean addHistory(History history) {
         boolean success = false;
         String query = "INSERT INTO history (amount, type, account_number) VALUES (?, ?, ?)";
@@ -296,6 +299,13 @@ public class BankerModel {
         return success;
     }
 
+    /**
+     * Retrieves a list of History objects for a given account number.
+     *
+     * @param accountNumber the account number for which to retrieve histories
+     * @return a list of History objects representing the account's transaction
+     *         history
+     */
     public List<History> getHistories(int accountNumber) {
         List<History> histories = new ArrayList<>();
         String query = "SELECT * FROM history WHERE account_number = ?";

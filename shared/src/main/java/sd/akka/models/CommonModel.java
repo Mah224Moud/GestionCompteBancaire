@@ -17,10 +17,10 @@ public class CommonModel {
     }
 
     /**
-     * Obtient le solde d'un compte spécifié.
+     * Retrieves the balance for the specified account number.
      *
-     * @param accountNumber Le numéro du compte.
-     * @return Le solde du compte.
+     * @param accountNumber the account number to retrieve the balance for
+     * @return the formatted balance amount as a string
      */
     public String getBalance(int accountNumber) {
         double balance = 0;
@@ -42,12 +42,12 @@ public class CommonModel {
     }
 
     /**
-     * Vérifie si un utilisateur est connecté.
+     * Determines whether a user is logged in or not.
      *
-     * @param email    l'email de l'utilisateur
-     * @param password le mot de passe de l'utilisateur
-     * @param type     le type d'utilisateur (banquier ou client)
-     * @return true si l'utilisateur est connecté, false sinon
+     * @param email    the email of the user
+     * @param password the password of the user
+     * @param type     the type of user ("banker" or "customer")
+     * @return true if the user is logged in, false otherwise
      */
     public boolean isLogged(String email, String password, String type) {
         boolean isLoggedIn = false;
@@ -86,10 +86,10 @@ public class CommonModel {
     }
 
     /**
-     * Vérifie si un compte existe.
+     * Determines whether an account with the given account number exists.
      *
-     * @param accountNumber Le numéro du compte.
-     * @return true si le compte existe, false sinon.
+     * @param accountNumber the account number to check
+     * @return true if an account with the given number exists, false otherwise
      */
     public boolean accountExists(int accountNumber) {
         boolean exists = false;

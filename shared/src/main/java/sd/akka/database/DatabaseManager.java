@@ -10,6 +10,14 @@ public class DatabaseManager {
     private static final String password = "Moud1997@";
     private static Connection connection = null;
 
+    /**
+     * Retrieves the connection to the database. If the connection is null or
+     * closed,
+     * a new connection is established using the provided URL, username, and
+     * password.
+     *
+     * @return the connection to the database
+     */
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -21,6 +29,12 @@ public class DatabaseManager {
         return connection;
     }
 
+    /**
+     * Closes the connection to the database and performs necessary cleanup.
+     *
+     * @param None
+     * @return None
+     */
     public void closeConnection() {
         try {
             connection.close();

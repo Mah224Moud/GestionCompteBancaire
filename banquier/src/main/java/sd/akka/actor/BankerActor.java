@@ -33,6 +33,11 @@ public class BankerActor extends AbstractActor {
         this.bank = actorSystem.actorSelection("akka://myActorSystem@127.0.0.1:8810/user/bankActor");
     }
 
+    /**
+     * Creates and returns the receive behavior of this actor.
+     *
+     * @return the receive behavior
+     */
     @Override
     public Receive createReceive() {
         return receiveBuilder()
@@ -45,11 +50,11 @@ public class BankerActor extends AbstractActor {
                             log.info("\n" + depositMsg);
                             bank.tell(new Message(depositMsg, 0), ActorRef.noSender());
                             banker.addHistory(new History(
-                                0, 
-                                transaction.getAccountNumber(), 
-                                transaction.getAmount(), 
-                                "Depot", 
-                                ""));
+                                    0,
+                                    transaction.getAccountNumber(),
+                                    transaction.getAmount(),
+                                    "Depot",
+                                    ""));
                             break;
                         case "Faire un retrait":
                             log.info("Message recu par la banque: {}\n", transaction.getMessage());
@@ -58,12 +63,12 @@ public class BankerActor extends AbstractActor {
                             log.info("\n" + withdrawalMsg);
                             bank.tell(new Message(withdrawalMsg, 0), ActorRef.noSender());
                             banker.addHistory(new History(
-                                0, 
-                                transaction.getAccountNumber(), 
-                                transaction.getAmount(), 
-                                "Retrait", 
-                                ""));
-                            break;                        
+                                    0,
+                                    transaction.getAccountNumber(),
+                                    transaction.getAmount(),
+                                    "Retrait",
+                                    ""));
+                            break;
                         default:
                             log.info("Message non traité par le client");
                             return;

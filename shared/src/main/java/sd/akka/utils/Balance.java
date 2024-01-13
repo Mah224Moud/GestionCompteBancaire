@@ -12,10 +12,20 @@ public class Balance implements Serializable {
         this.message = message;
     }
 
+    /**
+     * Retrieves the account number associated with this object.
+     *
+     * @return the account number
+     */
     public int getAccountNumber() {
         return accountNumber;
     }
 
+    /**
+     * Gets the message.
+     *
+     * @return the message
+     */
     public String getMessage() {
         return message;
     }

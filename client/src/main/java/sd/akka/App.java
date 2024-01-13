@@ -19,6 +19,12 @@ public class App {
         commonModel = new CommonModel(databaseManager);
     }
 
+    /**
+     * Starts the function with the given customer actor and actor system.
+     *
+     * @param customerActor the customer actor
+     * @param actorSystem   the actor system
+     */
     public void start(ActorRef customerActor, ActorSystem actorSystem) {
         try (Scanner scanner = new Scanner(System.in)) {
             String email = "";
@@ -84,6 +90,12 @@ public class App {
         }
     }
 
+    /**
+     * Ends the given actor system.
+     *
+     * @param actorSystem the actor system to be terminated
+     * @return void
+     */
     public void endSystem(ActorSystem actorSystem) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             actorSystem.terminate();
@@ -91,6 +103,11 @@ public class App {
         }));
     }
 
+    /**
+     * Initializes the main function of the Java program.
+     *
+     * @param args the command line arguments passed to the program
+     */
     public static void main(String[] args) {
         ActorSystem actorSystem = ActorSystem.create("Customer");
         ActorRef customer = actorSystem.actorOf(CustomerActor.props(actorSystem), "customer");
