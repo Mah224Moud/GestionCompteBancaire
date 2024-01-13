@@ -28,6 +28,11 @@ public class BankActor extends AbstractActor {
         this.banker = actorSystem.actorSelection("akka://Banker@127.0.0.1:8065/user/banker");
     }
 
+    /**
+     * Creates and returns a Receive object that defines the behavior of the actor.
+     *
+     * @return A Receive object that defines the behavior of the actor.
+     */
     @Override
     public Receive createReceive() {
         return receiveBuilder()
@@ -75,6 +80,12 @@ public class BankActor extends AbstractActor {
                 .build();
     }
 
+    /**
+     * Create the properties for the BankActor.
+     *
+     * @param actorSystem the actor system to be used by the BankActor
+     * @return the properties for the BankActor
+     */
     public static Props props(ActorSystem actorSystem) {
         return Props.create(BankActor.class, () -> new BankActor(actorSystem));
     }
