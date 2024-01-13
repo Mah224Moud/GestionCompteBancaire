@@ -53,6 +53,11 @@ public class CommonModel {
         boolean isLoggedIn = false;
         String query = "";
 
+        if (!Utils.isValidEmail(email)) {
+            throw new IllegalArgumentException(
+                    "L'email est invalide !!! Pensez à entrer une adresse email valide !!!");
+        }
+
         if (type.equals("banker")) {
             query = "SELECT password FROM banker WHERE email = ?";
         } else if (type.equals("customer")) {

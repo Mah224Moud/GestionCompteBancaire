@@ -21,52 +21,66 @@ public class App {
 
     public void start(ActorRef customerActor, ActorSystem actorSystem) {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("\n\nEntrez votre email : ");
-            String email = scanner.nextLine();
-            System.out.print("Entrez votre mot de passe : ");
-            String password = scanner.nextLine();
+            String email = "";
+            String password = "";
+            boolean isLogged = false;
 
-            if (!commonModel.isLogged(email, password, "customer")) {
-                System.out.println("Email ou mot de passe incorrect");
-            } else {
-                customerActor.tell(new Login(email, password), ActorRef.noSender());
-                while (true) {
-                    Utils.menuCustomer();
+            do {
+                try {
+                    System.out.print("\n\nEntrez votre email : ");
+                    email = scanner.nextLine();
+                    System.out.print("Entrez votre mot de passe : ");
+                    password = scanner.nextLine();
 
-                    System.out.print("Entrez votre choix: ");
-                    String choice = scanner.nextLine();
+                    isLogged = commonModel.isLogged(email, password, "customer");
 
-                    switch (choice) {
-                        case "1":
-                            System.out.println("Option choisie: Voir le solde");
-                            customerActor.tell(new Message("Voir le solde", 0.0), ActorRef.noSender());
-                            break;
-                        case "2":
-                            System.out.println("Option choisie: Faire un depot");
-                            System.out.print("Entrez le montant à deposer : ");
-                            double deposit = scanner.nextDouble();
-                            customerActor.tell(new Message("Faire un depot", deposit), ActorRef.noSender());
-                            break;
-                        case "3":
-                            System.out.println("Option choisie: Faire un retrait");
-                            System.out.print("Entrez le montant à retirer : ");
-                            double withdraw = scanner.nextDouble();
-                            customerActor.tell(new Message("Faire un retrait", withdraw), ActorRef.noSender());
-                            break;
-                        case "4":
-                            System.out.println("Option choisie: Consutler l'historique des transactions");
-                            customerActor.tell(new Message("Consutler l'historique des transactions", 0.0), ActorRef.noSender());
-                            break;
-                        case "5":
-                            System.out.println("Au revoir !");
-                            endSystem(actorSystem);
-                            return;
-                        default:
-                            System.out.println("Choix invalide");
-                            break;
+                    if (!isLogged) {
+                        System.out.println("Email ou mot de passe incorrect");
                     }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    isLogged = false;
+                }
+            } while (!isLogged);
+            customerActor.tell(new Login(email, password), ActorRef.noSender());
+            while (true) {
+                Utils.menuCustomer();
+
+                System.out.print("Entrez votre choix: ");
+                String choice = scanner.nextLine();
+
+                switch (choice) {
+                    case "1":
+                        System.out.println("Option choisie: Voir le solde");
+                        customerActor.tell(new Message("Voir le solde", 0.0), ActorRef.noSender());
+                        break;
+                    case "2":
+                        System.out.println("Option choisie: Faire un depot");
+                        System.out.print("Entrez le montant à deposer : ");
+                        double deposit = scanner.nextDouble();
+                        customerActor.tell(new Message("Faire un depot", deposit), ActorRef.noSender());
+                        break;
+                    case "3":
+                        System.out.println("Option choisie: Faire un retrait");
+                        System.out.print("Entrez le montant à retirer : ");
+                        double withdraw = scanner.nextDouble();
+                        customerActor.tell(new Message("Faire un retrait", withdraw), ActorRef.noSender());
+                        break;
+                    case "4":
+                        System.out.println("Option choisie: Consutler l'historique des transactions");
+                        customerActor.tell(new Message("Consutler l'historique des transactions", 0.0),
+                                ActorRef.noSender());
+                        break;
+                    case "5":
+                        System.out.println("Au revoir !");
+                        endSystem(actorSystem);
+                        return;
+                    default:
+                        System.out.println("Choix invalide");
+                        break;
                 }
             }
+
         }
     }
 
@@ -76,6 +90,7 @@ public class App {
             System.out.println("System terminated.");
         }));
     }
+
     public static void main(String[] args) {
         ActorSystem actorSystem = ActorSystem.create("Customer");
         ActorRef customer = actorSystem.actorOf(CustomerActor.props(actorSystem), "customer");

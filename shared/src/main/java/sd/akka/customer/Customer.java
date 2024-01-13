@@ -58,8 +58,8 @@ public class Customer extends User {
         return this.accountNumber;
     }
 
-    public void setAccountNumber(int account_number) {
-        this.accountNumber = account_number;
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public int getBankerId() {
