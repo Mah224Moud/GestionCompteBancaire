@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static final String url = "jdbc:mysql://localhost:3306/GestionCompteBancaire";
-    private static final String username = "root";
+    private static final String url = "jdbc:mysql://mysql-mamoudou.alwaysdata.net/mamoudou_gestion_compte_bancaire";
+    private static final String username = "mamoudou";
     private static final String password = "Moud1997@";
     private static Connection connection = null;
 
